@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Farming Business Dashboard</title>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background-color: #2e8b57;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    nav {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      height: fit-content;
+    }
+
+    nav ul {
+      list-style: none;
+    }
+
+    nav ul li {
+      padding: 10px 0;
+      cursor: pointer;
+    }
+
+    nav ul li:hover {
+      color: #2e8b57;
+    }
+
+    .dashboard {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      color: #2e8b57;
+    }
+
+    .card p {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+
+    .chart-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      margin-top: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #2e8b57;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🌾 Farming Business Dashboard</h1>
+  </header>
+
+  <div class="container">
+    <nav>
+      <ul>
+        <li>Dashboard</li>
+        <li>Crop Management</li>
+        <li>Sales</li>
+        <li>Inventory</li>
+        <li>Reports</li>
+      </ul>
+    </nav>
+
+    <div class="dashboard">
+      <!-- Summary Cards -->
+      <div class="cards">
+        <div class="card">
+          <h3>Total Crops</h3>
+          <p id="total-crops">12</p>
+        </div>
+        <div class="card">
+          <h3>Monthly Revenue</h3>
+          <p id="revenue">$8,450</p>
+        </div>
+        <div class="card">
+          <h3>Pending Orders</h3>
+          <p id="orders">5</p>
+        </div>
+        <div class="card">
+          <h3>Warehouse Stock</h3>
+          <p id="stock">1200 kg</p>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="chart-container">
+        <h3>Crop Yield This Year (kg)</h3>
+        <canvas id="cropChart"></canvas>
+      </div>
+
+      <!-- Sales Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Crop</th>
+            <th>Quantity</th>
+            <th>Revenue</th>
+          </tr>
+        </thead>
+        <tbody id="sales-table">
+          <tr>
+            <td>2025-09-01</td>
+            <td>Wheat</td>
+            <td>200 kg</td>
+            <td>$500</td>
+          </tr>
+          <tr>
+            <td>2025-09-10</td>
+            <td>Tomatoes</td>
+            <td>150 kg</td>
+            <td>$450</td>
+          </tr>
+          <tr>
+            <td>2025-09-15</td>
+            <td>Rice</td>
+            <td>300 kg</td>
+            <td>$900</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // Chart.js example for crop yield
+    const ctx = document.getElementById('cropChart').getContext('2d');
+    const cropChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+        datasets: [{
+          label: 'Yield (kg)',
+          data: [300, 500, 400, 600, 700, 800, 650, 720, 810],
+          backgroundColor: '#2e8b57'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Example: Dynamic update function (optional for future)
+    function updateDashboard() {
+      // Here you could fetch real-time data from APIs or localStorage
+      document.getElementById('total-crops').innerText = "14";
+      document.getElementById('revenue').innerText = "$9,250";
+    }
+
+    // Call update on load (if needed)
+    // updateDashboard();
+  </script>
+
+</body>
+</html>
