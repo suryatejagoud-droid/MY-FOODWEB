@@ -3,34 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Farming Business Dashboard</title>
+  <title>🏡 Real Estate Business Dashboard</title>
 
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
     }
 
     body {
-      background: #f4f4f4;
+      background: #f7f9fc;
       color: #333;
     }
 
     header {
-      background-color: #2e8b57;
-      padding: 20px;
+      background-color: #34495e;
       color: white;
+      padding: 20px;
       text-align: center;
     }
 
     .container {
       display: grid;
-      grid-template-columns: 1fr 3fr;
+      grid-template-columns: 200px 1fr;
       gap: 20px;
       padding: 20px;
     }
@@ -38,7 +38,7 @@
     nav {
       background-color: white;
       padding: 20px;
-      border-radius: 8px;
+      border-radius: 10px;
       height: fit-content;
     }
 
@@ -49,10 +49,12 @@
     nav ul li {
       padding: 10px 0;
       cursor: pointer;
+      color: #34495e;
+      font-weight: bold;
     }
 
     nav ul li:hover {
-      color: #2e8b57;
+      color: #2ecc71;
     }
 
     .dashboard {
@@ -63,51 +65,52 @@
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 15px;
     }
 
     .card {
       background-color: white;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       text-align: center;
     }
 
     .card h3 {
-      font-size: 20px;
-      color: #2e8b57;
+      color: #2c3e50;
+      font-size: 18px;
     }
 
     .card p {
       font-size: 24px;
       margin-top: 10px;
+      color: #27ae60;
     }
 
     .chart-container {
       background-color: white;
       padding: 20px;
-      border-radius: 8px;
+      border-radius: 10px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       background-color: white;
-      margin-top: 20px;
-      border-radius: 8px;
+      margin-top: 10px;
+      border-radius: 10px;
       overflow: hidden;
     }
 
     th, td {
-      padding: 12px;
+      padding: 12px 15px;
       text-align: left;
       border-bottom: 1px solid #ddd;
     }
 
     th {
-      background-color: #2e8b57;
+      background-color: #2ecc71;
       color: white;
     }
 
@@ -125,16 +128,16 @@
 <body>
 
   <header>
-    <h1>🌾 Farming Business Dashboard</h1>
+    <h1>🏡 Real Estate Business Dashboard</h1>
   </header>
 
   <div class="container">
     <nav>
       <ul>
         <li>Dashboard</li>
-        <li>Crop Management</li>
+        <li>Properties</li>
+        <li>Clients</li>
         <li>Sales</li>
-        <li>Inventory</li>
         <li>Reports</li>
       </ul>
     </nav>
@@ -143,96 +146,108 @@
       <!-- Summary Cards -->
       <div class="cards">
         <div class="card">
-          <h3>Total Crops</h3>
-          <p id="total-crops">12</p>
+          <h3>Listed Properties</h3>
+          <p id="listed">38</p>
         </div>
         <div class="card">
-          <h3>Monthly Revenue</h3>
-          <p id="revenue">$8,450</p>
+          <h3>Sold Properties</h3>
+          <p id="sold">21</p>
         </div>
         <div class="card">
-          <h3>Pending Orders</h3>
-          <p id="orders">5</p>
+          <h3>Total Revenue</h3>
+          <p id="revenue">$1.75M</p>
         </div>
         <div class="card">
-          <h3>Warehouse Stock</h3>
-          <p id="stock">1200 kg</p>
+          <h3>Clients</h3>
+          <p id="clients">102</p>
         </div>
       </div>
 
       <!-- Chart -->
       <div class="chart-container">
-        <h3>Crop Yield This Year (kg)</h3>
-        <canvas id="cropChart"></canvas>
+        <h3>Monthly Revenue (2025)</h3>
+        <canvas id="revenueChart"></canvas>
       </div>
 
-      <!-- Sales Table -->
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Crop</th>
-            <th>Quantity</th>
-            <th>Revenue</th>
-          </tr>
-        </thead>
-        <tbody id="sales-table">
-          <tr>
-            <td>2025-09-01</td>
-            <td>Wheat</td>
-            <td>200 kg</td>
-            <td>$500</td>
-          </tr>
-          <tr>
-            <td>2025-09-10</td>
-            <td>Tomatoes</td>
-            <td>150 kg</td>
-            <td>$450</td>
-          </tr>
-          <tr>
-            <td>2025-09-15</td>
-            <td>Rice</td>
-            <td>300 kg</td>
-            <td>$900</td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- Property Sales Table -->
+      <div class="table-container">
+        <h3>Recent Property Sales</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Property</th>
+              <th>Location</th>
+              <th>Price</th>
+              <th>Agent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2025-09-01</td>
+              <td>Villa Serenity</td>
+              <td>California</td>
+              <td>$500,000</td>
+              <td>Jane Smith</td>
+            </tr>
+            <tr>
+              <td>2025-09-05</td>
+              <td>Lakeview Apartment</td>
+              <td>Florida</td>
+              <td>$350,000</td>
+              <td>Mike Johnson</td>
+            </tr>
+            <tr>
+              <td>2025-09-12</td>
+              <td>Downtown Loft</td>
+              <td>New York</td>
+              <td>$800,000</td>
+              <td>Emma Brown</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
   <script>
-    // Chart.js example for crop yield
-    const ctx = document.getElementById('cropChart').getContext('2d');
-    const cropChart = new Chart(ctx, {
+    // Revenue Chart with Chart.js
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    const revenueChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
         datasets: [{
-          label: 'Yield (kg)',
-          data: [300, 500, 400, 600, 700, 800, 650, 720, 810],
-          backgroundColor: '#2e8b57'
+          label: 'Revenue ($)',
+          data: [120000, 90000, 150000, 170000, 130000, 180000, 210000, 160000, 190000],
+          backgroundColor: '#2ecc71'
         }]
       },
       options: {
         responsive: true,
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            ticks: {
+              callback: function(value) {
+                return '$' + (value / 1000) + 'k';
+              }
+            }
           }
         }
       }
     });
 
-    // Example: Dynamic update function (optional for future)
+    // Example for updating values dynamically
     function updateDashboard() {
-      // Here you could fetch real-time data from APIs or localStorage
-      document.getElementById('total-crops').innerText = "14";
-      document.getElementById('revenue').innerText = "$9,250";
+      document.getElementById('listed').innerText = "40";
+      document.getElementById('sold').innerText = "23";
+      document.getElementById('revenue').innerText = "$1.9M";
+      document.getElementById('clients').innerText = "108";
     }
 
-    // Call update on load (if needed)
+    // Optional: Call updateDashboard() on load
     // updateDashboard();
   </script>
-
 </body>
 </html>
